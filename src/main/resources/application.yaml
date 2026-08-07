@@ -20,7 +20,7 @@ spring:
         webflux:
           discovery:
             locator:
-              enabled: true
+              enabled: false   # ← Disable auto-route
               lower-case-service-id: true
           globalcors:
             cors-configurations:
@@ -29,6 +29,8 @@ spring:
                   - "http://localhost:3000"
                   - "http://localhost:4200"
                   - "http://localhost:5173"
+                  - "null"          # ← for file:// protocol
+                  - "file://"       # ← direct file open
                 allowedMethods:
                   - GET
                   - POST
@@ -60,13 +62,13 @@ spring:
 jwt:
   public-key: |
     -----BEGIN PUBLIC KEY-----
-    MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqrox1i23hw5LkvExqNHl
-    zPrrIyfpeFvj+xC5GRl6rJaI4g8pZNxNgSVzNJj7ZtRkrHUbNoKYs/zj37uB598+
-    F1/nqZ6mK8vQoOy1jul+4nGXhQiiU7bc9w1fLtwT/mG478V8KSnjWynoqVy3Uc30
-    H1l0sf4d0tn7EFt8Cd+7UDzbeZtgPKCuGoeMEuzmHHPPg1YjTz6K0mFEBiYpkwtm
-    5aUSkxG6E73Z4lOgCvjDUyqXuyciMtSOIHdXm21avoun9FQquXtjwkCNDOaZ2bxb
-    BEcs1CRn980AEijDU7zJuwpdmJl8c88gdutMP4stSCBzGzegbtNC5MlVyL6xy4D9
-    HwIDAQAB
+    MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvBJrujl1NSaDqIpNkxbB
+    NT7h1qiUKZLXdGxp2oWteFPwHscm9DgC6LQf0hJzzccYUKs9nilZ6eoWDRIwtUw2
+    cwfzbSiUFXSJNqpa0m7x4gF2Z0S3wH8bkyFW10HKqS1iTL0KWgC44Ns33WOVTyEQ
+    7TvWgZnLUC9dbVb15KpfIHU/kw+Y2DuGaX41fWptJ23ochHN+xPOQP8BzKwE270v
+    DT4fl+m1k8cR0BBUXLOM8YAq9PUkq52htxRo3swtkSPL6Jt90KhDMWDIk8aLQyeg
+    YJZqUu5HOk5Jwbm38DtsKbno7EuySWpSYVdCHUOY1s3UM1OONHAWM4LiNd6wT7hJ
+    KQIDAQAB
     -----END PUBLIC KEY-----
   issuer: auth-service
   audience: api-gateway
@@ -74,10 +76,10 @@ jwt:
 gateway:
   security:
     public-paths:
-      - /api/auth/login
-      - /api/auth/register
-      - /api/auth/refresh
-      - /api/auth/validate
+      - /auth-service/login
+      - /auth-service/register
+      - /auth-service/refresh
+      - /auth-service/validate
       - /actuator/health
       - /actuator/info
       - /actuator/prometheus

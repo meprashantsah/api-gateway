@@ -18,11 +18,11 @@ public class GatewayConfig {
     @Bean
     public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
         return builder.routes()
-                .route("auth-service", r -> r.path("/api/auth/**")
+                .route("auth-service", r -> r.path("/auth-service/**") //change from .route("auth-service", r -> r.path("/api//auth/**") so we can use /auth-service instead of /api/auth
                         .filters(f -> f
                                 .filter(authFilter.apply(new AuthenticationFilter.Config()))
                                 .circuitBreaker(config -> config.setName("authServiceCircuitBreaker").setFallbackUri("forward:/fallback/auth"))
-                                .rewritePath("/api/auth/(?<segment>.*)", "/api/auth/${segment}"))
+                                .rewritePath("/auth-service/(?<segment>.*)", "/api/auth/${segment}"))   // change from .rewritePath("/api/auth/(?<segment>.*)", "/api/auth/${segment}")) so we can use /auth-service instead of /api/auth
                         .uri("lb://auth-service"))
                 .route("order-service", r -> r.path("/api/orders/**")
                         .filters(f -> f
