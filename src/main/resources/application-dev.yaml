@@ -1,0 +1,19 @@
+server:
+  port: 8080
+
+spring:
+  redis:
+    host: localhost
+    port: 6379
+
+jwt:
+  public-key: |
+    -----BEGIN PUBLIC KEY-----
+    MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyZ2Syy...
+    -----END PUBLIC KEY-----
+
+logging:
+  level:
+    root: DEBUG
+    com.prashant.api_gateway: TRACE
+    org.springframework.cloud.gateway: TRACE
