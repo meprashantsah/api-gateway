@@ -9,7 +9,13 @@ spring:
 jwt:
   public-key: |
     -----BEGIN PUBLIC KEY-----
-    MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyZ2Syy...
+    MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqrox1i23hw5LkvExqNHl
+    zPrrIyfpeFvj+xC5GRl6rJaI4g8pZNxNgSVzNJj7ZtRkrHUbNoKYs/zj37uB598+
+    F1/nqZ6mK8vQoOy1jul+4nGXhQiiU7bc9w1fLtwT/mG478V8KSnjWynoqVy3Uc30
+    H1l0sf4d0tn7EFt8Cd+7UDzbeZtgPKCuGoeMEuzmHHPPg1YjTz6K0mFEBiYpkwtm
+    5aUSkxG6E73Z4lOgCvjDUyqXuyciMtSOIHdXm21avoun9FQquXtjwkCNDOaZ2bxb
+    BEcs1CRn980AEijDU7zJuwpdmJl8c88gdutMP4stSCBzGzegbtNC5MlVyL6xy4D9
+    HwIDAQAB
     -----END PUBLIC KEY-----
 
 logging:

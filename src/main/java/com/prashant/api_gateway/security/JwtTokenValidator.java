@@ -37,7 +37,7 @@ public class JwtTokenValidator {
         String cleaned = publicKeyString
                 .replace("-----BEGIN PUBLIC KEY-----", "")
                 .replace("-----END PUBLIC KEY-----", "")
-                .replaceAll("\s", "");
+                .replaceAll("\\s", "");
         if (cleaned.isBlank()) {
             throw new IllegalStateException("JWT public key is not configured");
         }

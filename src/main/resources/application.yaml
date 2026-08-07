@@ -6,55 +6,59 @@ spring:
     name: api-gateway
   cloud:
     gateway:
-      discovery:
-        locator:
-          enabled: true
-          lower-case-service-id: true
       default-filters:
         - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
-      globalcors:
-        cors-configurations:
-          '[/**]':
-            allowedOrigins:
-              - "http://localhost:3000"
-              - "http://localhost:4200"
-              - "http://localhost:5173"
-            allowedMethods:
-              - GET
-              - POST
-              - PUT
-              - DELETE
-              - OPTIONS
-              - PATCH
-            allowedHeaders:
-              - Authorization
-              - Content-Type
-              - X-Correlation-Id
-              - X-Requested-With
-              - Accept
-              - Origin
-            exposedHeaders:
-              - X-Correlation-Id
-              - X-RateLimit-Remaining
-              - X-RateLimit-Burst-Capacity
-              - X-RateLimit-Replenish-Rate
-            allowCredentials: true
-            maxAge: 3600
-  redis:
-    host: localhost
-    port: 6379
-    timeout: 2000ms
-    connect-timeout: 2000ms
-    lettuce:
-      pool:
-        max-active: 8
-        max-idle: 8
-        min-idle: 0
+      server:
+        webflux:
+          discovery:
+            locator:
+              enabled: true
+              lower-case-service-id: true
+          globalcors:
+            cors-configurations:
+              '[/**]':
+                allowedOrigins:
+                  - "http://localhost:3000"
+                  - "http://localhost:4200"
+                  - "http://localhost:5173"
+                allowedMethods:
+                  - GET
+                  - POST
+                  - PUT
+                  - DELETE
+                  - OPTIONS
+                  - PATCH
+                allowedHeaders:
+                  - Authorization
+                  - Content-Type
+                  - X-Correlation-Id
+                  - X-Requested-With
+                  - Accept
+                  - Origin
+                exposedHeaders:
+                  - X-Correlation-Id
+                  - X-RateLimit-Remaining
+                  - X-RateLimit-Burst-Capacity
+                  - X-RateLimit-Replenish-Rate
+                allowCredentials: true
+                maxAge: 3600
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      timeout: 2000ms
+      connect-timeout: 2000ms
 
 jwt:
   public-key: |
     -----BEGIN PUBLIC KEY-----
-    MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyZ2Syy...
+    MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqrox1i23hw5LkvExqNHl
+    zPrrIyfpeFvj+xC5GRl6rJaI4g8pZNxNgSVzNJj7ZtRkrHUbNoKYs/zj37uB598+
+    F1/nqZ6mK8vQoOy1jul+4nGXhQiiU7bc9w1fLtwT/mG478V8KSnjWynoqVy3Uc30
+    H1l0sf4d0tn7EFt8Cd+7UDzbeZtgPKCuGoeMEuzmHHPPg1YjTz6K0mFEBiYpkwtm
+    5aUSkxG6E73Z4lOgCvjDUyqXuyciMtSOIHdXm21avoun9FQquXtjwkCNDOaZ2bxb
+    BEcs1CRn980AEijDU7zJuwpdmJl8c88gdutMP4stSCBzGzegbtNC5MlVyL6xy4D9
+    HwIDAQAB
     -----END PUBLIC KEY-----
   issuer: auth-service
   audience: api-gateway
@@ -102,12 +106,13 @@ management:
       probes:
         enabled: true
     gateway:
-      enabled: true
+      access: READ_ONLY
   metrics:
     tags:
       application: ${spring.application.name}
-    export:
-      prometheus:
+  prometheus:
+    metrics:
+      export:
         enabled: true
   tracing:
     sampling:
