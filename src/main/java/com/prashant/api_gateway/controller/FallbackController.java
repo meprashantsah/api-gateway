@@ -19,22 +19,10 @@ public class FallbackController {
                 .body(createFallbackResponse("Auth Service", "Authentication service is temporarily unavailable."));
     }
 
-    @GetMapping("/orders")
-    public ResponseEntity<Map<String, Object>> ordersFallback() {
+    @GetMapping("/users")
+    public ResponseEntity<Map<String, Object>> usersFallback() {
         return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE)
-                .body(createFallbackResponse("Order Service", "Order service is temporarily unavailable."));
-    }
-
-    @GetMapping("/products")
-    public ResponseEntity<Map<String, Object>> productsFallback() {
-        return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE)
-                .body(createFallbackResponse("Product Service", "Product service is temporarily unavailable."));
-    }
-
-    @GetMapping("/admin")
-    public ResponseEntity<Map<String, Object>> adminFallback() {
-        return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE)
-                .body(createFallbackResponse("Admin Service", "Admin service is temporarily unavailable."));
+                .body(createFallbackResponse("User Service", "User service is temporarily unavailable."));
     }
 
     private Map<String, Object> createFallbackResponse(String service, String message) {
@@ -48,4 +36,3 @@ public class FallbackController {
         );
     }
 }
-
