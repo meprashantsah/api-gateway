@@ -60,6 +60,8 @@ eureka:
     hostname: localhost
     instance-id: ${spring.application.name}:${random.value}
     prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 10
+    lease-expiration-duration-in-seconds: 30
   client:
     service-url:
       defaultZone: ${EUREKA_URI:http://localhost:8761/eureka/}
@@ -78,6 +80,13 @@ gateway:
       - /auth-service/register
       - /auth-service/refresh
       - /auth-service/validate
+      # Invite links are shared outside the app, so the register page must be
+      # able to confirm a token without being authenticated.
+      - /auth-service/invites/validate
+      # WebSocket handshake: browsers cannot set custom headers on a WS upgrade,
+      # so the JWT is carried inside the STOMP CONNECT frame and validated by
+      # chat-service itself (jwt.public-key). REST under /chat-service stays protected.
+      - /chat-service/ws/**
       - /actuator/health
       - /actuator/info
       - /actuator/prometheus
@@ -97,6 +106,8 @@ resilience4j:
       authServiceCircuitBreaker:
         baseConfig: default
       userServiceCircuitBreaker:
+        baseConfig: default
+      chatServiceCircuitBreaker:
         baseConfig: default
 
 management:

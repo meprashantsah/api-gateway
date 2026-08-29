@@ -52,14 +52,12 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
                 String userId = jwtTokenValidator.getUserId(claims);
                 String username = jwtTokenValidator.getUsername(claims);
                 List<String> roles = jwtTokenValidator.getRoles(claims);
-                String rolesHeader = roles != null ? String.join(",", roles) : "";
 
-                log.debug("Authenticated user: {} ({}), roles: {}", username, userId, rolesHeader);
+                log.debug("Authenticated user: {} ({}), roles: {}", username, userId, roles);
 
                 ServerHttpRequest mutatedRequest = exchange.getRequest().mutate()
                         .header("X-User-Id", userId)
                         .header("X-Username", username != null ? username : "")
-                        .header("X-Roles", rolesHeader)
                         .header("X-Token-Valid", "true")
                         .build();
 

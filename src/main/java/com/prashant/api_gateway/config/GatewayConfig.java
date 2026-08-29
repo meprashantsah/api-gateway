@@ -30,6 +30,17 @@ public class GatewayConfig {
                                 .circuitBreaker(config -> config.setName("userServiceCircuitBreaker").setFallbackUri("forward:/fallback/users"))
                                 .rewritePath("/user-service/(?<segment>.*)", "/api/users/${segment}"))
                         .uri("lb://user-service"))
+                .route("chat-service-websocket", r -> r.path("/chat-service/ws/**")
+                        .filters(f -> f
+                                .filter(authFilter.apply(new AuthenticationFilter.Config()))
+                                .rewritePath("/chat-service/ws/(?<segment>.*)", "/ws/${segment}"))
+                        .uri("lb://chat-service"))
+                .route("chat-service", r -> r.path("/chat-service/**")
+                        .filters(f -> f
+                                .filter(authFilter.apply(new AuthenticationFilter.Config()))
+                                .circuitBreaker(config -> config.setName("chatServiceCircuitBreaker").setFallbackUri("forward:/fallback/chat"))
+                                .rewritePath("/chat-service/(?<segment>.*)", "/api/chat/${segment}"))
+                        .uri("lb://chat-service"))
                 .build();
     }
 }

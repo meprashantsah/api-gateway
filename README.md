@@ -81,7 +81,6 @@ When a valid JWT is present, the Gateway forwards:
 
 - `X-User-Id` - UUID of authenticated user
 - `X-Username` - Username
-- `X-Roles` - Comma-separated roles (e.g., `USER,ADMIN`)
 - `X-Correlation-Id` - Trace ID for distributed logging
 
 ## Public Paths (No Auth)

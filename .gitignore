@@ -41,3 +41,7 @@ out/
 src/main/resources/application-local.yaml
 *.pem
 .env
+
+# Markdown (except README)
+*.md
+!README.md
