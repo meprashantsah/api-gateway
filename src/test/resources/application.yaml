@@ -1,0 +1,12 @@
+# Test-only config so the context loads without real env vars.
+jwt:
+  public-key: |
+    -----BEGIN PUBLIC KEY-----
+    MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAuy4hxOn1ffO2LlAkT6Vz
+    h4fRjXz3BQW/wShvpH8cSuhz9SDgbrIuj4SbYFGk6/Fex+p7zuPPh5WMafF+sill
+    FkO2E59PpcF+1ZeMtHdYBYr154MCD51zg59SMmx/WxwGM+9TWj5H7SO5urCpdWVB
+    r80U/CvDy1bwoGHRQcm3V9n4FbKRAdy/Vu5kzU7F9uZSuiw9s/xnJBm0u8fldSKe
+    b0Sn7z+T6vrN4H4b9RtUNWCiHH/5qhkqFVV/iUWWPLASC8k+3O07Z+V4Y3DHKHem
+    X+k9OkPVZzYZ/l/QyA+JsqNZSyWqRkG33hrhAMTtJPhiMsb7bk6RxnQ4FZwV32qT
+    uQIDAQAB
+    -----END PUBLIC KEY-----
